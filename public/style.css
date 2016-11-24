@@ -1,0 +1,40 @@
+.post-body
+{
+	width: 100%;
+    margin: 0;
+    padding: 0;
+    border: thick, solid;
+    outline: none;
+	display: inline-block;
+	font:  Arial;
+	position: relative;
+    margin-left: 85px;
+    margin-right: 68px;
+    max-width: 700px;
+    background: rgb(206, 227, 248);
+    padding: 6px;
+    border-radius: 8px;
+}
+
+.post-title
+{
+	padding-left: 10px;
+	padding-top: 2px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-bottom: 2px;
+	font-size: 18px;
+	border: thick solid;
+	position: relative;
+	border-radius: 8px;
+}
+
+.post-contents
+{
+	padding-left: 10px;
+	padding-top: 5px;
+	font-size: 12px;
+	border: thick solid;
+	position: relative;
+	border-radius: 8px;
+}
