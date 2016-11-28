@@ -57,12 +57,6 @@ fs.readFile('public/post.html', function(err, data) {
     post = data;
 });
 
-fs.readFile('public/post.html', function(err, data){
-    if(err){
-        throw err;
-    }
-    post = data;
-});
 console.log(path);
 
 http.createServer(function(request, response){
@@ -83,12 +77,12 @@ http.createServer(function(request, response){
             response.writeHead(200, {'Content-Type': 'text/javascript'});
             response.write(jsFile);
             break;
-<<<<<<< HEAD
+// <<<<<<< HEAD
         case '/post.html':
             response.writeHead(200, {'Content-Type': 'text/html'});
             response.write(post);
             break;
-=======
+// =======
 		case '/post' :
             response.writeHead(200, {'Content-Type': 'text/html'});
             response.write(post);
@@ -97,7 +91,7 @@ http.createServer(function(request, response){
             response.writeHead(200, {'Content-Type': 'text/html'});
             response.write(newPost);
             break;
->>>>>>> 3e2cafd1a4368e0ec75ac38bdf267cf084a98287
+// >>>>>>> 3e2cafd1a4368e0ec75ac38bdf267cf084a98287
 		default:
 			response.writeHead(404, {'Content-Type': 'text/html'});
             response.write(page404);
@@ -105,3 +99,25 @@ http.createServer(function(request, response){
 	response.end();
 }).listen(port);
 console.log("== Listening on port 3000");
+
+
+/*
+var fs = require('fs');
+var path = require('path');
+var express = require('express');
+var exphbs = require('experss-handlebars');
+var app = express();
+var port = process.env.PORT || 3000 ;
+
+app.engine('handlebars', exphbs({defualtLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', function (req, res) {
+  res.render('index-page', {
+    pageTitle: 'Welcome!'
+  });
+});
+
+
