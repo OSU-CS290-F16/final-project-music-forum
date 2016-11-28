@@ -1,7 +1,3 @@
-/*
- * Here, you should write a simple server to serve files statically.
- */
-
 var path = require('path');
 
 var staticDir = path.join(__dirname, 'public');
@@ -16,6 +12,9 @@ var indexFile;
 var styleSheet;
 var page404;
 var jsFile;
+var post;
+
+var newPost;
 var post;
 
 fs.readFile('public/index.html', function(err, data) {
@@ -45,6 +44,18 @@ fs.readFile('public/index.js', function(err, data) {
     }
     jsFile = data;
 });
+fs.readFile('public/new post.html', function(err, data) {
+    if (err){
+        throw err;
+    }
+    newPost = data;
+});
+fs.readFile('public/post.html', function(err, data) {
+    if (err){
+        throw err;
+    }
+    post = data;
+});
 
 fs.readFile('public/post.html', function(err, data){
     if(err){
@@ -72,10 +83,21 @@ http.createServer(function(request, response){
             response.writeHead(200, {'Content-Type': 'text/javascript'});
             response.write(jsFile);
             break;
+<<<<<<< HEAD
         case '/post.html':
             response.writeHead(200, {'Content-Type': 'text/html'});
             response.write(post);
             break;
+=======
+		case '/post' :
+            response.writeHead(200, {'Content-Type': 'text/html'});
+            response.write(post);
+            break;
+		case '/new_post' :
+            response.writeHead(200, {'Content-Type': 'text/html'});
+            response.write(newPost);
+            break;
+>>>>>>> 3e2cafd1a4368e0ec75ac38bdf267cf084a98287
 		default:
 			response.writeHead(404, {'Content-Type': 'text/html'});
             response.write(page404);
