@@ -16,6 +16,7 @@ var indexFile;
 var styleSheet;
 var page404;
 var jsFile;
+var post;
 
 fs.readFile('public/index.html', function(err, data) {
     if (err){
@@ -45,6 +46,12 @@ fs.readFile('public/index.js', function(err, data) {
     jsFile = data;
 });
 
+fs.readFile('public/post.html', function(err, data){
+    if(err){
+        throw err;
+    }
+    post = data;
+});
 console.log(path);
 
 http.createServer(function(request, response){
@@ -65,11 +72,14 @@ http.createServer(function(request, response){
             response.writeHead(200, {'Content-Type': 'text/javascript'});
             response.write(jsFile);
             break;
+        case '/post.html':
+            response.writeHead(200, {'Content-Type': 'text/html'});
+            response.write(post);
+            break;
 		default:
 			response.writeHead(404, {'Content-Type': 'text/html'});
             response.write(page404);
 		}
 	response.end();
 }).listen(port);
-
-
+console.log("== Listening on port 3000");
