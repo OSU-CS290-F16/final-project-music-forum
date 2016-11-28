@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+	    <meta charset="utf-8">
+		
+	    <title>New Post</title>
+		
+	    <link rel="stylesheet" href="style.css" media="screen">
+
+	</head>
+	<body>
+		<header>
+			<h1>Music Forum</h1>
+			
+			<nav>
+				<ul class="navbar">
+					<li class="navbar-item"><a href="/">Home</a></li>
+					<li class="navbar-item"><a href="/about">About</a></li>
+					<li class="navbar-item"><a href="/create">New Post</a></li>
+					<li class="navbar-item navbar-right"><a href="#">Log In</a></li>
+				</ul>
+	      </nav>
+
+	    </header>
+	    <main>
+	    	
+	    	<form> <!--action="action_page.php" replace action_page.php with our js file that handles posting-->
+	    		Username:<br>
+	    		<input type="text" name="user">
+	    		<br>
+				Title:<br>
+				<input type="text" name="title">
+				<br>
+				Content:<br>
+				<textarea type="text" name="paragraph_text" cols="70" rows="10"></textarea>
+				<br><br>
+				<input type="submit" value="Create">
+			</form>
+
+	    </main>
+	</body>
+</html>
