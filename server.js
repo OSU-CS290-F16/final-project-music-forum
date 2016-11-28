@@ -76,11 +76,11 @@ http.createServer(function(request, response){
             response.writeHead(200, {'Content-Type': 'text/javascript'});
             response.write(jsFile);
             break;
-		case '/post.html' :
+		case '/post' :
             response.writeHead(200, {'Content-Type': 'text/html'});
             response.write(post);
             break;
-		case '/new_post.html' :
+		case '/new_post' :
             response.writeHead(200, {'Content-Type': 'text/html'});
             response.write(newPost);
             break;
