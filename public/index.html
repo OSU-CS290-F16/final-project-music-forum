@@ -58,6 +58,10 @@
 				</div>						
 			</div>
 		</section>
+		
+		<div class="add-note-button-container">
+			<button id="add-note-button">+</button>
+		</div>
 
     </main>
 
@@ -67,6 +71,45 @@
       </div>
     </footer>
 
+	<div id="modal-backdrop" class="hidden"></div>
+    <div id="add-note-modal" class="hidden">
+      <div class="modal-dialog">
+
+        <div class="modal-header">
+          <h3>Post Song</h3>
+          <button type="button" class="modal-close-button">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="todo-input-element required">
+            <label for="todo-input-song-title">Song Title</label>
+            <input type="text" id="todo-input-song-title">
+          </div>
+          <div class="todo-input-element">
+            <label for="todo-input-artist">Artist</label>
+            <input type="text" id="todo-input-artist">
+          </div>
+          <div class="todo-input-element">
+            <label for="todo-input-description">Description</label>
+            <input type="text" id="todo-input-description">
+          </div>
+          <div class="todo-input-element required">
+            <label for="todo-input-username">User</label>
+            <input type="text" id="todo-input-username">
+          </div>
+          <div class="todo-input-element required">
+            <label for="todo-input-link">Link</label>
+            <input type="text" id="todo-input-link">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="modal-cancel-button">Cancel</button>
+          <button type="button" class="modal-accept-button">Post</button>
+        </div>
+
+      </div>
+    </div>
 
   </body>
 
