@@ -87,7 +87,7 @@ http.createServer(function(request, response){
             response.writeHead(200, {'Content-Type': 'text/html'});
             response.write(post);
             break;
-		case '/new_post' :
+		case '/new' :
             response.writeHead(200, {'Content-Type': 'text/html'});
             response.write(newPost);
             break;
@@ -101,27 +101,32 @@ http.createServer(function(request, response){
 console.log("== Listening on port 3000");
 
 
-/*
-var fs = require('fs');
-var path = require('path');
-var express = require('express');
-var exphbs = require('experss-handlebars');
-var app = express();
-var port = process.env.PORT || 3000 ;
 
-app.engine('handlebars', exphbs({defualtLayout: 'main'}));
-app.set('view engine', 'handlebars');
+// var fs = require('fs');
+// var path = require('path');
+// var express = require('express');
+// var exphbs = require('express-handlebars');
+// var app = express();
+// var port = process.env.PORT || 3000 ;
 
-app.use(express.static(path.join(__dirname, 'public')));
+// app.engine('handlebars', exphbs({defualtLayout: 'main'}));
+// app.set('view engine', 'handlebars');
 
-app.get('/', function (req, res) {
-  res.status(200).render('index-page', {
-    pageTitle: 'Welcome!'
-  });
-});
+// app.use(express.static(path.join(__dirname, 'public')));
+
+// app.get('/', function (req, res) {
+//     res.status(200).render('index.html', {
+//         title: 'Welcome!'
+//     });
+// });
+
+// app.get('*', function(req, res){
+//     res.status(404).render('404.html', {
+//         title: 'Music Forum'
+//     });
+// });
 
 
-
-app.get('/post')
-*/
-
+// app.listen(port, function () {
+//   console.log("== Listening on port", port);
+// });
