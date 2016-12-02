@@ -115,9 +115,13 @@ app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function (req, res) {
-  res.render('index-page', {
+  res.status(200).render('index-page', {
     pageTitle: 'Welcome!'
   });
 });
 
+
+
+app.get('/post')
+*/
 
