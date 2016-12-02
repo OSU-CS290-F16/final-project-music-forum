@@ -1,35 +1,17 @@
-/*
- * This function removes a particular todo note when its dismiss button is
- * clicked.  This event listener should be delegated to the <main> element.
- */
-function removeTodoOnDelegatedDismissClick(event) {
 
-  var clickedElem = event.target;
-  var clickedElemParent = event.target.parentNode;
-
-  /*
-   * If the clicked element is the dismiss button of a todo note, then remove
-   * the todo from its parent.
-   */
-  if (clickedElem.classList.contains('dismiss-button') && clickedElemParent.classList.contains('todo')) {
-    var todoNoteElemParent = clickedElemParent.parentNode;
-    todoNoteElemParent.removeChild(clickedElemParent);
-  }
-
-}
 
 /*
  * This function shows the modal to add a new todo note when the add note
  * button is clicked.
  */
-function displayAddNoteModal() {
+function displayAddPostModal() {
 
   var backdropElem = document.getElementById('modal-backdrop');
-  var addNoteModalElem = document.getElementById('add-note-modal');
+  var addPostModalElem = document.getElementById('add-post-modal');
 
   // Show the modal and its backdrop.
   backdropElem.classList.remove('hidden');
-  addNoteModalElem.classList.remove('hidden');
+  addPostModalElem.classList.remove('hidden');
 
 }
 
@@ -38,14 +20,14 @@ function displayAddNoteModal() {
  * existing values from the input fields whenever any of the modal close
  * actions are taken.
  */
-function closeAddNoteModal() {
+function closeAddPostModal() {
 
   var backdropElem = document.getElementById('modal-backdrop');
-  var addNoteModalElem = document.getElementById('add-note-modal');
+  var addPostModalElem = document.getElementById('add-post-modal');
 
   // Hide the modal and its backdrop.
   backdropElem.classList.add('hidden');
-  addNoteModalElem.classList.add('hidden');
+  addPostModalElem.classList.add('hidden');
 
   clearTodoInputValues();
 
@@ -56,9 +38,9 @@ function closeAddNoteModal() {
  */
 function clearTodoInputValues() {
 
-  var todoInputElems = document.getElementsByClassName('todo-input-element');
-  for (var i = 0; i < todoInputElems.length; i++) {
-    var input = todoInputElems[i].querySelector('input, textarea');
+  var postInputElems = document.getElementsByClassName('post-input-element');
+  for (var i = 0; i < postInputElems.length; i++) {
+    var input = postInputElems[i].querySelector('input, textarea');
     input.value = '';
   }
 
@@ -78,82 +60,62 @@ function clearTodoInputValues() {
  *
  * <p class="indent-wrapped"><span class="label">label: </span>text</p>
  */
-function createNewTodoBodyElem(text, label) {
+function createNewPostBodyElem(text, label) {
 
-  var newTodoBodyElem = document.createElement('p');
+  var newPostBodyElem = document.createElement('p');
 
   // If the body element has a label, add a span containing that label.
   if (label) {
-    newTodoBodyElem.classList.add('indent-wrapped');
+    newPostBodyElem.classList.add('title-style');
     var labelSpanElem = document.createElement('span');
     labelSpanElem.classList.add(label);
     var labelSpanElemText = document.createTextNode(label + ': ');
     labelSpanElem.appendChild(labelSpanElemText);
-    newTodoBodyElem.appendChild(labelSpanElem);
+    newPostBodyElem.appendChild(labelSpanElem);
   }
 
-  var newTodoBodyElemText = document.createTextNode(text);
-  newTodoBodyElem.appendChild(newTodoBodyElemText);
+  var newPostBodyElemText = document.createTextNode(text);
+  newPostBodyElem.appendChild(newPostBodyElemText);
 
   return newTodoBodyElem;
 
 }
 
 /*
- * This function creates a new <section> element for a todo given all the
- * possible things that could go into the todo.
+ * This function creates a new <section> element for a post given all the
+ * possible things that could go into the post.
  */
-function createNewTodoSection(what, where, when, who, details) {
+function createNewPostSection(song-name, artist-name, description, user-name) {
 
-  // Create a new todo section element.
-  var newTodoSection = document.createElement('section');
-  newTodoSection.classList.add('todo');
+  // Create a new post section element.
+  var newPostSection = document.createElement('section');
+  newPostSection.classList.add('post');
 
-  // Add the todo header.
-  var newTodoHeader = document.createElement('h2');
-  var newTodoHeaderText = document.createTextNode(what);
-  newTodoHeader.appendChild(newTodoHeaderText);
-  newTodoSection.appendChild(newTodoHeader);
+  // Start the body of the new post element.
+  var newPostBody = document.createElement('div');
+  newPostBody.classList.add('post-body');
 
-  // Start the body of the new todo element.
-  var newTodoBody = document.createElement('div');
-  newTodoBody.classList.add('todo-body');
 
-  // If we have a "where" specified, add that to the body.
-  if (where) {
-    var todoBodyWhere = createNewTodoBodyElem(where, 'where');
-    newTodoBody.appendChild(todoBodyWhere);
+  var postBodySongName = createNewPostBodyElem(song-name, 'song-name');
+  newPostBody.appendChild(postBodySongName);
+  
+  var postBodyArtistName = createNewPostBodyElem(artist-name, 'artist-name');
+  newPostBody.appendChild(postBodyArtistName);
+  
+  if (description) {
+    var postBodyDescription = createNewPostBodyElem(description, 'description');
+	newPostBody.appendChild(postBodyDescription);
   }
+  
+  var postBodyUserName = createNewPostBodyElem(user-name, 'user-name');
+  newPostBody.appendChild(postBodyUserName);
 
-  // If we have a "when" specified, add that to the body.
-  if (when) {
-    var todoBodyWhen = createNewTodoBodyElem(when, 'when');
-    newTodoBody.appendChild(todoBodyWhen);
-  }
 
-  // If we have a "who" specified, add that to the body.
-  if (who) {
-    var todoBodyWho = createNewTodoBodyElem(who, 'who');
-    newTodoBody.appendChild(todoBodyWho);
-  }
-
-  // If we have details specified, add them to the body.
-  if (details) {
-    var todoBodyDetails = createNewTodoBodyElem(details);
-    newTodoBody.appendChild(todoBodyDetails);
-  }
 
   // Add the body.
-  newTodoSection.appendChild(newTodoBody)
+  newPostSection.appendChild(newPostBody);
 
-  // Add the dismiss button and hook up a click event listener to it.
-  var newTodoDismissButton = document.createElement('div');
-  newTodoDismissButton.classList.add('dismiss-button');
-  var newTodoDismissButtonText = document.createTextNode('×');
-  newTodoDismissButton.appendChild(newTodoDismissButtonText);
-  newTodoSection.appendChild(newTodoDismissButton);
-
-  return newTodoSection;
+  return newPostSection;
 
 }
 
@@ -161,35 +123,34 @@ function createNewTodoSection(what, where, when, who, details) {
  * This function inserts a new todo note based on the values specified in the
  * add note modal when the modal accept button is clicked.
  */
-function insertNewTodo() {
+function insertNewPost() {
 
   // Grab the values from all the input fields.
-  var todoInputWhat = document.getElementById('todo-input-what').value;
-  var todoInputWhere = document.getElementById('todo-input-where').value;
-  var todoInputWhen = document.getElementById('todo-input-when').value;
-  var todoInputWho = document.getElementById('todo-input-who').value;
-  var todoInputDetails = document.getElementById('todo-input-details').value;
+  var postInputSongName = document.getElementById('todo-input-what').value;
+  var postInputArtistName = document.getElementById('todo-input-where').value;
+  var postInputDescription = document.getElementById('todo-input-when').value;
+  var postInputUserName = document.getElementById('todo-input-who').value;
 
-  // We only add the note if we have a value for "what".
-  if (todoInputWhat) {
+
+  // We only add the note if we have a value for required fields
+  if (postInputSongName && postInputArtistName && postInputUserName) {
 
     // Create a new todo section and append it to the main element.
-    var newTodoSection = createNewTodoSection(
-      todoInputWhat,
-      todoInputWhere,
-      todoInputWhen,
-      todoInputWho,
-      todoInputDetails
+    var newPostSection = createNewPostSection(
+      postInputSongName,
+      postInputArtistName,
+      postInputDescription,
+      postInputDescription
     );
     var mainElement = document.querySelector('main');
-    mainElement.appendChild(newTodoSection);
+    mainElement.appendChild(newPostSection);
 
-    closeAddNoteModal();
+    closeAddPostModal();
 
   } else {
 
-    // If there's no "what" value specified, throw an alert.
-    alert('You must specify a value for the "what" field.');
+    // If there's no required values specified, throw an alert.
+    alert('You must specify a value for the required fields.');
 
   }
 
@@ -200,18 +161,17 @@ window.addEventListener('DOMContentLoaded', function (event) {
 
   // Delegate an event listener to <main> to handle clicks on dismiss buttons.
   var main = document.querySelector('main');
-  main.addEventListener('click', removeTodoOnDelegatedDismissClick);
 
-  var addNoteButtonElem = document.getElementById('add-note-button');
-  addNoteButtonElem.addEventListener('click', displayAddNoteModal);
+  var addPostButtonElem = document.getElementById('add-post-button');
+  addPostButtonElem.addEventListener('click', displayAddPostModal);
 
-  var modalCloseButton = document.querySelector('#add-note-modal .modal-close-button');
-  modalCloseButton.addEventListener('click', closeAddNoteModal);
+  var modalCloseButton = document.querySelector('#add-post-modal .modal-close-button');
+  modalCloseButton.addEventListener('click', closeAddPostModal);
 
-  var modalCancalButton = document.querySelector('#add-note-modal .modal-cancel-button');
-  modalCancalButton.addEventListener('click', closeAddNoteModal);
+  var modalCancelButton = document.querySelector('#add-post-modal .modal-cancel-button');
+  modalCancelButton.addEventListener('click', closeAddPostModal);
 
-  var modalAcceptButton = document.querySelector('#add-note-modal .modal-accept-button');
-  modalAcceptButton.addEventListener('click', insertNewTodo);
+  var modalAcceptButton = document.querySelector('#add-post-modal .modal-accept-button');
+  modalAcceptButton.addEventListener('click', insertNewPost);
 
 });

@@ -112,14 +112,14 @@ nav {
 }
 
 
-.add-note-button-container {
+.add-post-button-container {
   position: fixed;
   bottom: 35px;
   right: 35px;
   z-index: 10;
 }
 
-#add-note-button {
+#add-post-button {
   width: 64px;
   height: 64px;
   background-color: #848484;
@@ -134,7 +134,7 @@ nav {
   outline: none;
 }
 
-#add-note-button:hover {
+#add-post-button:hover {
   box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.33);
 }
 
@@ -148,7 +148,7 @@ nav {
   background-color: rgba(0, 0, 0, 0.85);
 }
 
-#add-note-modal {
+#add-post-modal {
   position: fixed;
   top: 0;
   bottom: 0;
