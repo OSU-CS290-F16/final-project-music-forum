@@ -119,7 +119,7 @@ function createNewPostSection(song_name, artist_name, description, user_name) {
   
   if (description) {
     var postBodyDescription = createNewPostBodyElem('Description', 'description', description);
-	newPostBody.appendChild(postBodyDescription);
+	  newPostBody.appendChild(postBodyDescription);
   }
   
   var postBodyUserName = createNewPostBodyUserName('Posted by', 'user_name', user_name);
@@ -155,7 +155,7 @@ function insertNewPost() {
       postInputSongName,
       postInputArtistName,
       postInputDescription,
-      postInputDescription
+      postInputUserName
     );
     var mainElement = document.querySelector('main');
     mainElement.appendChild(newPostSection);
