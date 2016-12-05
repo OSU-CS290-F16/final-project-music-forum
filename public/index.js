@@ -138,7 +138,7 @@ function createNewPostSection(song_name, artist_name, description, user_name, em
 
 
   // Add the body.
-  newPostSection.appendChild(newPostBody);
+  newPostSection.insertBefore(newPostBody, newPostSection.firstChild);
 
   return newPostSection;
 
@@ -170,7 +170,7 @@ function insertNewPost() {
       postInputEmbed
     );
     var mainElement = document.querySelector('main');
-    mainElement.appendChild(newPostSection);
+    mainElement.insertBefore(newPostSection, mainElement.firstChild);
 
     closeAddPostModal();
 
