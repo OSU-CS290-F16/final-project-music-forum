@@ -184,6 +184,92 @@ function insertNewPost() {
 
 }
 
+/*JavaScript for creating new comments*/
+
+function createNewCommentBodyElem(title, text) {
+
+  var newCommentBodyElem = document.createElement('p');
+	  
+  newCommentBodyElem.classList.add('comment-style');
+
+  var newCommentBodyElemText = document.createTextNode(title + ":<br />" + text);
+  newCommentBodyElem.appendChild(newCommentBodyElemText);
+
+  return newPostBodyElem;
+
+}
+
+
+function createNewCommentSection(comment_name, comment_content) {
+
+
+  var newCommentSection = document.createElement('section');
+  newCommentSection.classList.add('comment');
+
+  var newCommentBody = document.createElement('div');
+  newCommentBody.classList.add('comment-body');
+
+
+  var commentName = createNewCommentBodyElem('User Name', comment_name);
+  newCommentBody.appendChild(commentName);
+  
+  var commentContent = createNewCommentBodyElem('Comment', comment_content);
+  newCommentBody.appendChild(commentContent);
+  
+
+  // Add the body.
+  newCommentSection.insertBefore(newCommentBody, newCommentSection.firstChild);
+
+  return newCommentSection;
+
+}
+
+
+function insertNewComment() {
+
+  // Grab the values from all the input fields.
+  var commentName = document.getElementById('comment_name').value;
+  var commentContent = document.getElementById('comment_content').value;
+
+
+  // We only add the note if we have a value for required fields
+  if (commentName && commentContent) {
+
+
+    var newPostSection = createNewPostSection(
+	  commentName,
+	  commentContent
+    );
+    var mainElement = document.querySelector('main');
+    mainElement.insertBefore(newCommentSection, mainElement.firstChild);
+
+    clearCommentInputValues(); //clear input fields
+
+  } else {
+
+    // If there's no required values specified, throw an alert.
+    alert('You must specify a value for the required fields.');
+
+  }
+  
+
+}
+
+function clearCommentInputValues() {
+
+  var commentInputElems = document.getElementsByClassName('comment-body');
+  for (var i = 0; i < commentInputElems.length; i++) {
+    var input = commentInputElems[i].querySelector('input, textarea');
+    input.value = '';
+  }
+
+}
+
+
+/*=====================================*/
+
+
+
 function goToPost() {
   console.log("==click");
   window.location.href = "localhost:3000/post1.html";
@@ -194,6 +280,9 @@ window.addEventListener('DOMContentLoaded', function (event) {
 
   // Delegate an event listener to <main> to handle clicks on dismiss buttons.
   var main = document.querySelector('main');
+  
+  var submitCommentButtonElem = document.getElementById('submit');
+  submitCommentButtonElem.addEventListener('click', insertNewComment);
 
   var addPostButtonElem = document.getElementById('add-post-button');
   addPostButtonElem.addEventListener('click', displayAddPostModal);
