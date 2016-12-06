@@ -132,8 +132,8 @@ function createNewPostSection(song_name, artist_name, description, user_name, em
   newPostBody.appendChild(postBodyUserName);
 
 
-  var postSongEmbed = createNewPostBodyEmbed(embed);
-  newPostBody.appendChild(postSongEmbed);
+  // var postSongEmbed = createNewPostBodyEmbed(embed);
+  // newPostBody.appendChild(postSongEmbed);
 
 
 
@@ -272,7 +272,7 @@ function clearCommentInputValues() {
 
 function goToPost() {
   console.log("==click");
-  window.location = "file:///public/post.html";
+  window.location.href = "localhost:3000/post1.html";
 }
 
 // Wait until the DOM content is loaded to hook up UI interactions, etc.
@@ -296,9 +296,10 @@ window.addEventListener('DOMContentLoaded', function (event) {
   var modalAcceptButton = document.querySelector('#add-post-modal .modal-accept-button');
   modalAcceptButton.addEventListener('click', insertNewPost);
 
-  var more = document.getElementsByClassName('.more');
-  for (var i=0;i<more.length;i++){
-    console.log("== function");
-    addEvent(more[0], 'click', goToPost);
+  var more = document.querySelectorAll('.more');
 
-  }});
+  [].forEach.call(more, function(more) {
+    more.addEventListener("click", goToPost, false);
+  });
+
+});
