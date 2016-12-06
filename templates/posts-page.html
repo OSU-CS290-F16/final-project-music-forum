@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Music Forum - Posts</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <header>
+		<h1>Music Forum</h1>
+		<nav>
+			<ul class="navbar">
+				<li class="navbar-item"><a href="/">Home</a></li>
+				<li class="navbar-item"><a href="/about.html">About</a></li>
+			</ul>
+        </nav>
+    </header>
+    <main>
+      {{#each posts}}
+		<section class = "post">
+			<div class = "post-body">
+				<p class = "title-style"><span class = "song_name">Song Name:</span> {{song-name}}</p>			
+				<p class = "title-style"><span class = "artist_name">Artist name:</span> {{artist}}</p>
+				<p class = "title-style"><span class = "description">Description:</span> {{description}}</p>	
+				{{{soundcloud}}}
+				<br>
+				<div class = "user_name">
+					<span class = "posted_by">Posted by </span> {{username}}</p>	
+				</div>
+        <div class = "more">
+          <p>More</p>
+        </div>
+			</div>
+		</section>
+      {{/each}}
+	  
+	  	<div class="add-post-button-container">
+			<button id="add-post-button">+</button>
+		</div>
+    </main>
+	<footer>
+      <div class="copyright">
+        Copyright &copy; 2016
+      </div>
+    </footer>
+	<div id="modal-backdrop" class="hidden"></div>
+    <div id="add-post-modal" class="hidden">
+      <div class="modal-dialog">
+
+        <div class="modal-header">
+          <h3>Post Song</h3>
+          <button type="button" class="modal-close-button">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="post-input-element required">
+            <label for="post-input-song-name">Song Name</label>
+            <input type="text" id="post-input-song-name">
+          </div>
+          <div class="post-input-element required">
+            <label for="post-input-artist">Artist</label>
+            <input type="text" id="post-input-artist">
+          </div>
+          <div class="post-input-element">
+            <label for="post-input-description">Description</label>
+            <input type="text" id="post-input-description">
+          </div>
+          <div class="post-input-element required">
+            <label for="post-input-username">User</label>
+            <input type="text" id="post-input-username">
+          </div>
+          <div class="post-input-element required">
+            <label for="post-input-link">Soundcloud</label>
+            <input type="text" id="post-input-file" placeholder="Paste embed code here">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="modal-cancel-button">Cancel</button>
+          <button type="button" class="modal-accept-button">Post</button>
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+
+  <script src="index.js"></script>
+</html>

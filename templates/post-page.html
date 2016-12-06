@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Music Forum - {{username}}</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <header>
+      <h1>{{username}}'s post</h1>
+    </header>
+    <main>
+      <section class = "post">
+			<div class = "post-body">
+				<p class = "title-style"><span class = "song_name">Song Name:</span> {{song-name}}</p>			
+				<p class = "title-style"><span class = "artist_name">Artist name:</span> {{artist}}</p>
+				<p class = "title-style"><span class = "description">Description:</span> {{description}}</p>	
+				{{{soundcloud}}}
+				<br>
+				<div class = "user_name">
+					<span class = "posted_by">Posted by </span> {{username}}</p>	
+				</div>
+			</div>
+		</section>
+    </main>
+  </body>
+</html>

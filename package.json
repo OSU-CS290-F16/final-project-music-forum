@@ -1,0 +1,30 @@
+{
+  "name": "simple-handlebars",
+  "version": "1.0.0",
+  "description": "A simple dynamic content server using Express and Handlebars",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OSU-CS290-F16/simple-handlebars.git"
+  },
+  "keywords": [
+    "express",
+    "handlebars",
+    "dynamic",
+    "content"
+  ],
+  "author": "Rob Hess <hessro@oregonstate.edu>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OSU-CS290-F16/simple-handlebars/issues"
+  },
+  "homepage": "https://github.com/OSU-CS290-F16/simple-handlebars#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "handlebars": "^4.0.5"
+  }
+}
