@@ -132,6 +132,7 @@ function createNewPostSection(song_name, artist_name, description, user_name, em
   var postBodyUserName = createNewPostBodyUserName('Posted by', 'user_name', user_name);
   newPostBody.appendChild(postBodyUserName);
 
+
   var postSongEmbed = createNewPostBodyEmbed(embed);
   newPostBody.appendChild(postSongEmbed);
 
@@ -180,16 +181,13 @@ function insertNewPost() {
     alert('You must specify a value for the required fields.');
 
   }
-  // var more = document.getElementsByClassName('.more');
-  // more.addEventListener('click', goToPost);
-
-  //can't get this to work yet
   
 
 }
 
 function goToPost() {
-  location.href = "localhost:3000/post";
+  console.log("==click");
+  window.location = "file:///public/post.html";
 }
 
 // Wait until the DOM content is loaded to hook up UI interactions, etc.
@@ -210,5 +208,9 @@ window.addEventListener('DOMContentLoaded', function (event) {
   var modalAcceptButton = document.querySelector('#add-post-modal .modal-accept-button');
   modalAcceptButton.addEventListener('click', insertNewPost);
 
+  var more = document.getElementsByClassName('.more');
+  for (var i=0;i<more.length;i++){
+    console.log("== function");
+    addEvent(more[0], 'click', goToPost);
 
-});
+  }});
