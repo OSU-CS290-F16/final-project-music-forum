@@ -8,6 +8,8 @@ var port = process.env.PORT || 3000;
 
 //http://stackoverflow.com/questions/32546100/how-to-write-data-to-a-json-file-using-javascript
 
+//http://stackoverflow.com/questions/36856232/write-add-data-in-json-file-using-node-js
+
 // Read the source of the post page template and compile it with Handlebars.
 var postPageSource = fs.readFileSync(path.join(__dirname, 'templates', 'post-page.html'), 'utf8');
 var postPageTemplate = Handlebars.compile(postPageSource);
@@ -37,7 +39,7 @@ app.get('/', function (req, res) {
  * Express machinery to get the requested post from the URL and then fill
  * in a template with that post's info using Handlebars.
  */
-app.get('/posts/:post', function (req, res, next) {
+app.get('/:post', function (req, res, next) {
 
   var post = posts[req.params.post];
 

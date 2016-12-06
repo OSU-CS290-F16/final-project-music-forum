@@ -79,7 +79,6 @@ function createNewPostBodyUserName(title, label, text) {
 
   // If the body element has a label, add a span containing that label.
   if (label) {
-	  
 	newPostBodyElem.classList.add('title-style');
 	var labelDivElem = document.createElement('div');
 	labelDivElem.classList.add(label);
