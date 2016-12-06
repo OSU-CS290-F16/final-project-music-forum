@@ -132,8 +132,8 @@ function createNewPostSection(song_name, artist_name, description, user_name, em
   newPostBody.appendChild(postBodyUserName);
 
 
-  var postSongEmbed = createNewPostBodyEmbed(embed);
-  newPostBody.appendChild(postSongEmbed);
+  // var postSongEmbed = createNewPostBodyEmbed(embed);
+  // newPostBody.appendChild(postSongEmbed);
 
 
 
@@ -186,7 +186,7 @@ function insertNewPost() {
 
 function goToPost() {
   console.log("==click");
-  window.location = "file:///public/posts/post.html";
+  window.location.href = "localhost:3000/post1.html";
 }
 
 // Wait until the DOM content is loaded to hook up UI interactions, etc.
