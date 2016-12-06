@@ -1,24 +1,36 @@
+
 body {
 	font-family: 'Helvetica Neue', Helvetica, sans-serif;
 	margin: 0px;
+	background-image: url("background.jpg");
 }
 
+iframe
+{
+	width: 75%;
+	position: relative;
+	padding-left: 10px;
+	padding-top: 10px;
+}
 
 .post-body
 {
-	width: 100%;
     margin: 20px;
     padding: 0;
     outline: none;
-	display: inline-block;
 	font:  Arial;
 	position: relative;
-    margin-left: 25%;
-    max-width: 700px;
+    margin-left: 20%;
+	margin-right: 20%;
     background: #58ACFA;
     padding: 6px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.33);
 
+}
+
+.post-body:hover
+{
+	background: #86c5ff;
 }
 
 .more:hover{
@@ -89,7 +101,6 @@ h1 {
 nav {
   background-color: #848484;
   color: white;
-  margin: 0 -20px;  /* negative margin here makes up for header padding */
   font-size: 28px;
   font-weight: 200;
 }

@@ -1,132 +1,66 @@
+var fs = require('fs');
 var path = require('path');
-
-var staticDir = path.join(__dirname, 'public');
-var indexFilename = 'index.html';
-var notFoundFilename = '404.html';
+var express = require('express');
+var Handlebars = require('handlebars');
+var posts = require('./posts');
+var app = express();
 var port = process.env.PORT || 3000;
 
-var http = require('http');
-var fs = require('fs');
+//http://stackoverflow.com/questions/32546100/how-to-write-data-to-a-json-file-using-javascript
 
-var indexFile;
-var styleSheet;
-var page404;
-var jsFile;
-var post;
+// Read the source of the post page template and compile it with Handlebars.
+var postPageSource = fs.readFileSync(path.join(__dirname, 'templates', 'post-page.html'), 'utf8');
+var postPageTemplate = Handlebars.compile(postPageSource);
 
-var newPost;
-var post;
+// Read the source of the posts page template and compile it with Handlebars.
+var postsPageSource = fs.readFileSync(path.join(__dirname, 'templates', 'posts-page.html'), 'utf8');
+var postsPageTemplate = Handlebars.compile(postsPageSource);
 
-fs.readFile('public/index.html', function(err, data) {
-    if (err){
-        throw err;
-    }
-    indexFile = data;
+
+// Serve static files from public/.
+app.use(express.static(path.join(__dirname, 'public')));
+
+/*
+ * For the /posts route, we dynamically build the content of the page using
+ * the set of all available posts.  We let our Handlebars template do the
+ * work, by simply passing the relevant data into the template.
+ */
+app.get('/', function (req, res) {
+
+  var content = postsPageTemplate({ posts: posts });
+  res.send(content);
+
 });
 
-fs.readFile('public/style.css', function(err, data) {
-    if (err){
-        throw err;
-    }
-    styleSheet = data;
+/*
+ * Here, we use a dynamic route to create a page for each post.  We use
+ * Express machinery to get the requested post from the URL and then fill
+ * in a template with that post's info using Handlebars.
+ */
+app.get('/posts/:post', function (req, res, next) {
+
+  var post = posts[req.params.post];
+
+  if (post) {
+
+    var content = postPageTemplate(post);
+    res.send(content);
+
+  } else {
+
+    // If we don't have info for the requested post, fall through to a 404.
+    next();
+
+  }
+
 });
 
-fs.readFile('public/404.html', function(err, data) {
-    if (err){
-        throw err;
-    }
-    page404 = data;
+// If we didn't find the requested resource, send a 404 error.
+app.get('*', function(req, res) {
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
-fs.readFile('public/index.js', function(err, data) {
-    if (err){
-        throw err;
-    }
-    jsFile = data;
+// Listen on the specified port.
+app.listen(port, function () {
+  console.log("== Listening on port", port);
 });
-fs.readFile('public/new post.html', function(err, data) {
-    if (err){
-        throw err;
-    }
-    newPost = data;
-});
-fs.readFile('public/post.html', function(err, data) {
-    if (err){
-        throw err;
-    }
-    post = data;
-});
-
-console.log(path);
-
-http.createServer(function(request, response){
-	    switch (request.url) {
-		case '/' :    
-            response.writeHead(200, {'Content-Type': 'text/html'});
-            response.write(indexFile);
-			break;
-		case '/index.html' :    
-            response.writeHead(200, {'Content-Type': 'text/html'});
-            response.write(indexFile);
-			break;
-        case '/style.css' :
-            response.writeHead(200, {'Content-Type': 'text/css'});
-            response.write(styleSheet);
-            break;
-		case '/index.js' :
-            response.writeHead(200, {'Content-Type': 'text/javascript'});
-            response.write(jsFile);
-            break;
-// <<<<<<< HEAD
-        case '/post.html':
-            response.writeHead(200, {'Content-Type': 'text/html'});
-            response.write(post);
-            break;
-// =======
-		case '/post' :
-            response.writeHead(200, {'Content-Type': 'text/html'});
-            response.write(post);
-            break;
-		case '/new' :
-            response.writeHead(200, {'Content-Type': 'text/html'});
-            response.write(newPost);
-            break;
-// >>>>>>> 3e2cafd1a4368e0ec75ac38bdf267cf084a98287
-		default:
-			response.writeHead(404, {'Content-Type': 'text/html'});
-            response.write(page404);
-		}
-	response.end();
-}).listen(port);
-console.log("== Listening on port 3000");
-
-
-
-// var fs = require('fs');
-// var path = require('path');
-// var express = require('express');
-// var exphbs = require('express-handlebars');
-// var app = express();
-// var port = process.env.PORT || 3000 ;
-
-// app.engine('handlebars', exphbs({defualtLayout: 'main'}));
-// app.set('view engine', 'handlebars');
-
-// app.use(express.static(path.join(__dirname, 'public')));
-
-// app.get('/', function (req, res) {
-//     res.status(200).render('index.html', {
-//         title: 'Welcome!'
-//     });
-// });
-
-// app.get('*', function(req, res){
-//     res.status(404).render('404.html', {
-//         title: 'Music Forum'
-//     });
-// });
-
-
-// app.listen(port, function () {
-//   console.log("== Listening on port", port);
-// });
