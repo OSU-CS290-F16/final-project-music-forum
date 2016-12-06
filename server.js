@@ -8,6 +8,8 @@ var port = process.env.PORT || 3000;
 
 //http://stackoverflow.com/questions/32546100/how-to-write-data-to-a-json-file-using-javascript
 
+//http://stackoverflow.com/questions/36856232/write-add-data-in-json-file-using-node-js
+
 // Read the source of the post page template and compile it with Handlebars.
 var postPageSource = fs.readFileSync(path.join(__dirname, 'templates', 'post-page.html'), 'utf8');
 var postPageTemplate = Handlebars.compile(postPageSource);
