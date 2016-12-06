@@ -21,6 +21,19 @@ body {
 
 }
 
+.more:hover{
+  cursor: pointer;
+}
+
+.more{
+  font-size: 0.75em;
+  color: white;
+  text-decoration: underline;
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
+
 .title-style
 {
 	padding-left: 10px;

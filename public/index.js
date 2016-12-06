@@ -180,7 +180,16 @@ function insertNewPost() {
     alert('You must specify a value for the required fields.');
 
   }
+  // var more = document.getElementsByClassName('.more');
+  // more.addEventListener('click', goToPost);
 
+  //can't get this to work yet
+  
+
+}
+
+function goToPost() {
+  location.href = "localhost:3000/post";
 }
 
 // Wait until the DOM content is loaded to hook up UI interactions, etc.
@@ -200,5 +209,6 @@ window.addEventListener('DOMContentLoaded', function (event) {
 
   var modalAcceptButton = document.querySelector('#add-post-modal .modal-accept-button');
   modalAcceptButton.addEventListener('click', insertNewPost);
+
 
 });
