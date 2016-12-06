@@ -37,7 +37,7 @@ app.get('/', function (req, res) {
  * Express machinery to get the requested post from the URL and then fill
  * in a template with that post's info using Handlebars.
  */
-app.get('/posts/:post', function (req, res, next) {
+app.get('/:post', function (req, res, next) {
 
   var post = posts[req.params.post];
 
