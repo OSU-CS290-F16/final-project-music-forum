@@ -96,11 +96,18 @@ function createNewPostBodyUserName(title, label, text) {
 
   return newPostBodyElem;
 }
+
+function createNewPostBodyEmbed(embed){
+  
+  var newPostBodyElem = document.createElement('div');
+  newPostBodyElem.innerHTML = embed;
+  return newPostBodyElem;
+}
 /*
  * This function creates a new <section> element for a post given all the
  * possible things that could go into the post.
  */
-function createNewPostSection(song_name, artist_name, description, user_name) {
+function createNewPostSection(song_name, artist_name, description, user_name, embed) {
 
   // Create a new post section element.
   var newPostSection = document.createElement('section');
@@ -119,16 +126,19 @@ function createNewPostSection(song_name, artist_name, description, user_name) {
   
   if (description) {
     var postBodyDescription = createNewPostBodyElem('Description', 'description', description);
-	newPostBody.appendChild(postBodyDescription);
+	  newPostBody.appendChild(postBodyDescription);
   }
   
   var postBodyUserName = createNewPostBodyUserName('Posted by', 'user_name', user_name);
   newPostBody.appendChild(postBodyUserName);
 
+  var postSongEmbed = createNewPostBodyEmbed(embed);
+  newPostBody.appendChild(postSongEmbed);
+
 
 
   // Add the body.
-  newPostSection.appendChild(newPostBody);
+  newPostSection.insertBefore(newPostBody, newPostSection.firstChild);
 
   return newPostSection;
 
@@ -145,6 +155,7 @@ function insertNewPost() {
   var postInputArtistName = document.getElementById('post-input-artist').value;
   var postInputDescription = document.getElementById('post-input-description').value;
   var postInputUserName = document.getElementById('post-input-username').value;
+  var postInputEmbed = document.getElementById('post-input-file').value;
 
 
   // We only add the note if we have a value for required fields
@@ -155,10 +166,11 @@ function insertNewPost() {
       postInputSongName,
       postInputArtistName,
       postInputDescription,
-      postInputDescription
+      postInputUserName,
+      postInputEmbed
     );
     var mainElement = document.querySelector('main');
-    mainElement.appendChild(newPostSection);
+    mainElement.insertBefore(newPostSection, mainElement.firstChild);
 
     closeAddPostModal();
 
@@ -168,7 +180,16 @@ function insertNewPost() {
     alert('You must specify a value for the required fields.');
 
   }
+  // var more = document.getElementsByClassName('.more');
+  // more.addEventListener('click', goToPost);
 
+  //can't get this to work yet
+  
+
+}
+
+function goToPost() {
+  location.href = "localhost:3000/post";
 }
 
 // Wait until the DOM content is loaded to hook up UI interactions, etc.
@@ -188,5 +209,6 @@ window.addEventListener('DOMContentLoaded', function (event) {
 
   var modalAcceptButton = document.querySelector('#add-post-modal .modal-accept-button');
   modalAcceptButton.addEventListener('click', insertNewPost);
+
 
 });
