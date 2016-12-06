@@ -187,7 +187,7 @@ function insertNewPost() {
 
 function goToPost() {
   console.log("==click");
-  window.location = "file:///public/post.html";
+  window.location = "file:///public/posts/post.html";
 }
 
 // Wait until the DOM content is loaded to hook up UI interactions, etc.
@@ -208,9 +208,10 @@ window.addEventListener('DOMContentLoaded', function (event) {
   var modalAcceptButton = document.querySelector('#add-post-modal .modal-accept-button');
   modalAcceptButton.addEventListener('click', insertNewPost);
 
-  var more = document.getElementsByClassName('.more');
-  for (var i=0;i<more.length;i++){
-    console.log("== function");
-    addEvent(more[0], 'click', goToPost);
+  var more = document.querySelectorAll('.more');
 
-  }});
+  [].forEach.call(more, function(more) {
+    more.addEventListener("click", goToPost, false);
+  });
+
+});
