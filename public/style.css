@@ -31,6 +31,7 @@ iframe
 .post-body:hover
 {
 	background: #86c5ff;
+  cursor: pointer;
 }
 
 .more:hover{
