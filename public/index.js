@@ -138,6 +138,8 @@ function createNewPostSection(song_name, artist_name, description, user_name, em
   newPostBody.appendChild(morebutton);
 
   moreText.addEventListener('click', goToPost);
+  
+
   //var obj = {input1: 'value', input2: 'value'};
   //localStorage.setItem( obj[0], JSON.stringify(obj));
   //var json = JSON.stringify(obj);
