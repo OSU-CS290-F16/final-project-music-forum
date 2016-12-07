@@ -2,6 +2,7 @@
  * This function shows the modal to add a new todo note when the add note
  * button is clicked.
  */
+ 
 function displayAddPostModal() {
 
   var backdropElem = document.getElementById('modal-backdrop');
@@ -140,6 +141,16 @@ function createNewPostSection(song_name, artist_name, description, user_name, em
   moreText.addEventListener('click', goToPost);
   
 
+ /* 
+  var randNum = Math.floor((Math.random() * 100) + 1); 
+  var postName = "post" + randNum;
+  var obj = [postName, {"username": user_name, "song-name": song_name, "description": description, "artist": artist_name, "soundcloud": embed}];  
+  var json = JSON.stringify(obj);
+  
+  fs.writeFile('posts.json', json, 'utf8', callback);
+  */
+  
+  
   //var obj = {input1: 'value', input2: 'value'};
   //localStorage.setItem( obj[0], JSON.stringify(obj));
   //var json = JSON.stringify(obj);
