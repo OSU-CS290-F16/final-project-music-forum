@@ -90,15 +90,20 @@ iframe
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.33);
 }
 
-.comment-user
+.comment
 {
-
+    margin: 20px;
+    padding: 0;
+    outline: none;
+	font:  Arial;
+	position: relative;
+    margin-left: 0px;
+	margin-right: 0px;
+    background: #58ACFA;
+    padding: 6px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.33);
 }
 
-.comment-contents
-{
-
-}
 
 h1 {
 	background-color: #58ACFA;
@@ -251,11 +256,11 @@ nav {
   border: 1px solid #aaa;
 }
 
-.todo-input-element textarea {
+.post-input-element textarea {
   min-height: 64px;
 }
 
-.todo-input-element.required label::after {
+.post-input-element.required label::after {
   content: ' *';
   color: red;
 }
