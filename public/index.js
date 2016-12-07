@@ -137,6 +137,7 @@ function createNewPostSection(song_name, artist_name, description, user_name, em
   morebutton.appendChild(moreText);
   newPostBody.appendChild(morebutton);
 
+  moreText.addEventListener('click', goToPost);
   //var obj = {input1: 'value', input2: 'value'};
   //localStorage.setItem( obj[0], JSON.stringify(obj));
   //var json = JSON.stringify(obj);
@@ -286,7 +287,7 @@ function clearCommentInputValues() {
 function goToPost() {
   console.log("==click");
   var more = event.target.value;
-  window.location.href = '/post1';
+  window.location.href = '/post' + 1;
 }
 
 // Wait until the DOM content is loaded to hook up UI interactions, etc.
