@@ -1,5 +1,4 @@
 
-
 /*
  * This function shows the modal to add a new todo note when the add note
  * button is clicked.
@@ -131,9 +130,27 @@ function createNewPostSection(song_name, artist_name, description, user_name, em
   var postBodyUserName = createNewPostBodyUserName('Posted by', 'user_name', user_name);
   newPostBody.appendChild(postBodyUserName);
 
+  var morebutton = document.createElement('div');
+  morebutton.className += 'more';
+  var moreText = document.createElement('p')
+  var textnode = document.createTextNode("More");
+  moreText.appendChild(textnode);
+  morebutton.appendChild(moreText);
+  newPostBody.appendChild(morebutton);
 
-  // var postSongEmbed = createNewPostBodyEmbed(embed);
-  // newPostBody.appendChild(postSongEmbed);
+  //var obj = {input1: 'value', input2: 'value'};
+  //localStorage.setItem( obj[0], JSON.stringify(obj));
+  //var json = JSON.stringify(obj);
+  //var obj = {
+  //  table: []
+  //};
+  //obj.table.push({id: 1, square:2});
+  //var json = JSON.stringify(obj);
+  //fs.writeFile('myjsonfile.json', json, 'utf8', callback);
+
+  //fs.writeFileSync("posts.json", json, "UTF-8",{'flags': 'a'});
+   //var postSongEmbed = createNewPostBodyEmbed(embed);
+   //newPostBody.appendChild(postSongEmbed);
 
 
 
