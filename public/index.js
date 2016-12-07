@@ -216,9 +216,7 @@ function createNewCommentSection(comment_name, comment_content) {
   var commentContent = createNewCommentBodyElem('Comment', comment_content);
   newCommentBody.appendChild(commentContent);
   
-
-  // Add the body.
-  newCommentSection.insertBefore(newCommentBody, newCommentSection.firstChild);
+  newCommentSection.appendChild(newCommentBody);
 
   return newCommentSection;
 
@@ -236,7 +234,7 @@ function insertNewComment() {
   if (commentName && commentContent) {
 
 
-    var newPostSection = createNewPostSection(
+    var newCommentSection = createNewCommentSection(
 	  commentName,
 	  commentContent
     );
@@ -281,8 +279,8 @@ window.addEventListener('DOMContentLoaded', function (event) {
   // Delegate an event listener to <main> to handle clicks on dismiss buttons.
   var main = document.querySelector('main');
   
-  var submitCommentButtonElem = document.getElementById('submit');
-  submitCommentButtonElem.addEventListener('click', insertNewComment);
+  var commentButtonElem = document.getElementById('commentButton');
+  commentButtonElem.addEventListener('click', insertNewComment);
 
   var addPostButtonElem = document.getElementById('add-post-button');
   addPostButtonElem.addEventListener('click', displayAddPostModal);
