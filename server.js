@@ -50,70 +50,70 @@ app.get('/', function (req, res) {
  * Express machinery to get the requested post from the URL and then fill
  * in a template with that post's info using Handlebars.
  */
-// app.get('/:post', function (req, res, next) {
-
-//   var post = posts[req.params.post];
-
-//   if (post) {
-
-//     var content = postPageTemplate(post);
-//     res.send(content);
-
-//   } else {
-
-//     // If we don't have info for the requested post, fall through to a 404.
-//     next();
-
-//   }
-
-// });
-
 app.get('/:post', function (req, res, next) {
 
-  /*
-   * Initiate a query for only the person we're interested in for this page.
-   * We'll respond to the requesting client from within the callback of the
-   * query.
-   */
-   var collection = mongoDB.collection('posts');
-   collection.find({ username: req.params.post }).toArray(function (err, post) {
-    if (err) {
+  var post = posts[req.params.post];
 
-      /*
-       * Send an error response if there was a problem fetching the person
-       * from the DB.
-       */
-      console.log("== Error fetching post (", req.params.post, ") from database:", err);
-      res.status(500).send("Error fetching post from database: " + err);
+  if (post) {
 
-    } else if (post.length >= 1) {
+    var content = postPageTemplate(post);
+    res.send(content);
 
-      /*
-       * If we got at least one person (should be exactly 1), then we found the
-       * requested person.  Compute whether they're 65 or older and send them
-       * to Handlebars for rendering.
-       */
-      var poster = post[0];
+  } else {
 
-      // Render the page, sending all the needed info to Handlebars.
-      res.render('posts-page', {
-        pageTitle: person.name,
-        person: person
-      });
+    // If we don't have info for the requested post, fall through to a 404.
+    next();
 
-    } else {
-
-      /*
-       * If there wasn't info for the requested person in the DB (i.e. if we
-       * didn't get any rows back from our query), then fall through to a 404.
-       */
-      next();
-
-    }
-
-  });
+  }
 
 });
+
+// app.get('/:post', function (req, res, next) {
+
+//   /*
+//    * Initiate a query for only the person we're interested in for this page.
+//    * We'll respond to the requesting client from within the callback of the
+//    * query.
+//    */
+//    var collection = mongoDB.collection('posts');
+//    collection.find({ username: req.params.post }).toArray(function (err, post) {
+//     if (err) {
+
+//       /*
+//        * Send an error response if there was a problem fetching the person
+//        * from the DB.
+//        */
+//       console.log("== Error fetching post (", req.params.post, ") from database:", err);
+//       res.status(500).send("Error fetching post from database: " + err);
+
+//     } else if (post.length >= 1) {
+
+//       /*
+//        * If we got at least one person (should be exactly 1), then we found the
+//        * requested person.  Compute whether they're 65 or older and send them
+//        * to Handlebars for rendering.
+//        */
+//       var poster = post[0];
+
+//       // Render the page, sending all the needed info to Handlebars.
+//       res.render('posts-page', {
+//         pageTitle: person.name,
+//         person: person
+//       });
+
+//     } else {
+
+//       /*
+//        * If there wasn't info for the requested person in the DB (i.e. if we
+//        * didn't get any rows back from our query), then fall through to a 404.
+//        */
+//       next();
+
+//     }
+
+//   });
+
+// });
 
 // If we didn't find the requested resource, send a 404 error.
 app.get('*', function(req, res) {
