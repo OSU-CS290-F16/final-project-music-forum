@@ -184,9 +184,10 @@ function insertNewPost() {
 
 }
 
-function goToPost() {
+function goToPost(event) {
   console.log("==click");
-  window.location.href = "localhost:3000/post1.html";
+  var more = event.target.value;
+  window.location.href = '/post1';
 }
 
 // Wait until the DOM content is loaded to hook up UI interactions, etc.
