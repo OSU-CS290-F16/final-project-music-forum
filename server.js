@@ -5,6 +5,16 @@ var Handlebars = require('handlebars');
 var posts = require('./posts');
 var app = express();
 var port = process.env.PORT || 3000;
+var MongoClient = require('mongodb').MongoClient;
+var bodyParser = require('body-parser');
+
+var mongoHost = process.env.MONGO_HOST;
+var mongoPort = process.env.MONGO_PORT || 27017;
+var mongoUser = process.env.MONGO_USER;
+var mongoPassword = process.env.MONGO_PASSWORD;
+var mongoDBName = process.env.MONGO_DB;
+var mongoURL = 'mongodb://' + mongoUser + ':' + mongoPassword + '@' + mongoHost + ':' + mongoPort + '/' + mongoDBName;
+var mongoDB;
 
 //http://stackoverflow.com/questions/32546100/how-to-write-data-to-a-json-file-using-javascript
 
@@ -22,6 +32,7 @@ var postsPageTemplate = Handlebars.compile(postsPageSource);
 // Serve static files from public/.
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(bodyParser.json());
 /*
  * For the /posts route, we dynamically build the content of the page using
  * the set of all available posts.  We let our Handlebars template do the
@@ -34,28 +45,73 @@ app.get('/', function (req, res) {
 
 });
 
-
-
 /*
  * Here, we use a dynamic route to create a page for each post.  We use
  * Express machinery to get the requested post from the URL and then fill
  * in a template with that post's info using Handlebars.
  */
+// app.get('/:post', function (req, res, next) {
+
+//   var post = posts[req.params.post];
+
+//   if (post) {
+
+//     var content = postPageTemplate(post);
+//     res.send(content);
+
+//   } else {
+
+//     // If we don't have info for the requested post, fall through to a 404.
+//     next();
+
+//   }
+
+// });
+
 app.get('/:post', function (req, res, next) {
 
-  var post = posts[req.params.post];
+  /*
+   * Initiate a query for only the person we're interested in for this page.
+   * We'll respond to the requesting client from within the callback of the
+   * query.
+   */
+   var collection = mongoDB.collection('posts');
+   collection.find({ username: req.params.post }).toArray(function (err, post) {
+    if (err) {
 
-  if (post) {
+      /*
+       * Send an error response if there was a problem fetching the person
+       * from the DB.
+       */
+      console.log("== Error fetching post (", req.params.post, ") from database:", err);
+      res.status(500).send("Error fetching post from database: " + err);
 
-    var content = postPageTemplate(post);
-    res.send(content);
+    } else if (post.length >= 1) {
 
-  } else {
+      /*
+       * If we got at least one person (should be exactly 1), then we found the
+       * requested person.  Compute whether they're 65 or older and send them
+       * to Handlebars for rendering.
+       */
+      var poster = post[0];
 
-    // If we don't have info for the requested post, fall through to a 404.
-    next();
+      // Render the page, sending all the needed info to Handlebars.
+      res.render('posts-page', {
+        pageTitle: person.name,
+        person: person
+      });
 
-  }
+    } else {
+
+      /*
+       * If there wasn't info for the requested person in the DB (i.e. if we
+       * didn't get any rows back from our query), then fall through to a 404.
+       */
+      next();
+
+    }
+
+  });
 
 });
 

@@ -1,4 +1,3 @@
-
 /*
  * This function shows the modal to add a new todo note when the add note
  * button is clicked.
@@ -306,21 +305,27 @@ window.addEventListener('DOMContentLoaded', function (event) {
   // commentButtonElem.addEventListener('click', insertNewComment);
 
   var addPostButtonElem = document.getElementById('add-post-button');
-  addPostButtonElem.addEventListener('click', displayAddPostModal);
-
+  if(addPostButtonElem){
+    addPostButtonElem.addEventListener('click', displayAddPostModal);
+  }
   var modalCloseButton = document.querySelector('#add-post-modal .modal-close-button');
-  modalCloseButton.addEventListener('click', closeAddPostModal);
-
+  if(modalCloseButton){
+    modalCloseButton.addEventListener('click', closeAddPostModal);
+  }
+  
   var modalCancelButton = document.querySelector('#add-post-modal .modal-cancel-button');
-  modalCancelButton.addEventListener('click', closeAddPostModal);
+  if(modalCancelButton)
+    modalCancelButton.addEventListener('click', closeAddPostModal);
 
   var modalAcceptButton = document.querySelector('#add-post-modal .modal-accept-button');
-  modalAcceptButton.addEventListener('click', insertNewPost);
+  if(modalAcceptButton)
+    modalAcceptButton.addEventListener('click', insertNewPost);
 
   var more = document.querySelectorAll('.more');
-
-  [].forEach.call(more, function(more) {
-    more.addEventListener("click", goToPost, false);
-  });
+  if(more){
+    [].forEach.call(more, function(more) {
+      more.addEventListener("click", goToPost, false);
+    });
+  }
 
 });
